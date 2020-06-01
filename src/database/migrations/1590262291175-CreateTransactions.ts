@@ -28,7 +28,9 @@ export default class CreateTransactions1590262291175
           },
           {
             name: 'value',
-            type: 'float',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
             isNullable: false,
           },
           {
@@ -39,7 +41,7 @@ export default class CreateTransactions1590262291175
           {
             name: 'category_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -70,5 +72,6 @@ export default class CreateTransactions1590262291175
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('transactions');
+    await queryRunner.dropForeignKey('transactions', 'TransactionCategory');
   }
 }
