@@ -32,27 +32,7 @@ transactionsRouter.get('/', async (request, response) => {
 });
 
 transactionsRouter.post('/', async (request, response) => {
-  const { title, value, type, category: categoryTitle } = request.body;
-
-  const categoryRepository = getRepository(Category);
-
-  let category_id = '';
-
-  const checkCategoryExists = await categoryRepository.findOne({
-    where: { title: categoryTitle },
-  });
-
-  if (checkCategoryExists) {
-    category_id = checkCategoryExists.id;
-  } else {
-    const category = categoryRepository.create({
-      title: categoryTitle,
-    });
-
-    await categoryRepository.save(category);
-
-    category_id = category.id;
-  }
+  const { title, value, type, category } = request.body;
 
   const createTransaction = new CreateTransactionService();
 
@@ -60,10 +40,8 @@ transactionsRouter.post('/', async (request, response) => {
     title,
     value,
     type,
-    category_id,
+    category,
   });
-
-  delete transaction.category_id;
 
   return response.json(transaction);
 });
