@@ -23,6 +23,12 @@ class CreateTransactionService {
     const transactionRepository = getCustomRepository(TransactionRepository);
     const categoryRepository = getRepository(Category);
 
+    const { total } = await transactionRepository.getBalance();
+
+    if (type.toLowerCase() === 'outcome' && total < value) {
+      throw new AppError('Outcome is bigger than total');
+    }
+
     let transactionCategory = await categoryRepository.findOne({
       where: {
         title: category,
@@ -35,12 +41,6 @@ class CreateTransactionService {
       });
 
       await categoryRepository.save(transactionCategory);
-    }
-
-    const { total } = await transactionRepository.getBalance();
-
-    if (type.toLowerCase() === 'outcome' && total < value) {
-      throw new AppError('Outcome is bigger than total');
     }
 
     const transaction = transactionRepository.create({
