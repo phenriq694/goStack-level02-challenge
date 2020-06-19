@@ -27,3 +27,6 @@ yarn typorm migration:run
 # Start application
 $ yarn dev:server
 ```
+
+[nodejs]: https://nodejs.org/
+[yarn]: https://yarnpkg.com/
