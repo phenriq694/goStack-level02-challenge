@@ -10,7 +10,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com), [Node
 docker run --name gostack_postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 
 # Create a database called
-gostack_desafio06_tests
+gostack_desafio06
 
 # Clone this repository
 $ git clone https://github.com/phenriq694/goStack-level02-challenge.git
@@ -22,7 +22,7 @@ $ cd goStack-level02-challenge
 $ yarn
 
 # Run the migrations
-yarn typorm migration:run
+yarn typeorm migration:run
 
 # Start application
 $ yarn dev:server
